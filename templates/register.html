@@ -10,11 +10,19 @@
 {% endblock %}
 
 {% block content %}
+  <div class="container">
+    {% for message in get_flashed_messages() %}
+    <div class="alert alert-warning">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {{ message }}
+    </div>
+    {% endfor %}
 
-<form class="form-signup" method='POST' action="#">
+
+<form class="form-signup" method='POST'>
     {{ form.hidden_tag() }}
-    {{ wtf.form_field(form.email) }}
     {{ wtf.form_field(form.username) }}
+    {{ wtf.form_field(form.email) }}
     {{ wtf.form_field(form.password) }}
     <button class=class="btn btn-info" type="submit">Register</button>
 </form>
