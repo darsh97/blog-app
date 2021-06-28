@@ -2,11 +2,30 @@
 {% import "bootstrap/wtf.html" as wtf %}
 
 
-{% block title %} Login {% endblock %}
+{% block title %} Sign in {% endblock %}
 
+{% block styles %}
+{{super()}}
+  <link rel="stylesheet" href="{{url_for('static', filename='register.css')}}">
+{% endblock %}
 
 {% block content %}
+  <div class="container">
+    {% for message in get_flashed_messages() %}
+    <div class="alert alert-warning">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {{ message }}
+    </div>
+    {% endfor %}
 
-<h1> Welcome to login page </h1>
+
+<form class="form-login" method='POST'>
+    {{ form.hidden_tag() }}
+    {{ wtf.form_field(form.username) }}
+    {{ wtf.form_field(form.password) }}
+    <button class=class="btn btn-info" type="submit">Sign in</button>
+</form>
+
+<p> New User ? <a href="{{url_for('auth.signup')}}"> Sign up </a> </p>
 
 {% endblock content %}

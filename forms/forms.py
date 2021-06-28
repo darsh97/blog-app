@@ -20,7 +20,11 @@ class SignupForm(FlaskForm):
     
     
 class LoginForm(FlaskForm):
-    pass
+    username = StringField('username', [Length(min=4, max = 25), DataRequired()])
+    password = PasswordField('password', [DataRequired()])    
+    
+    def user_name_exists(self, username: str) -> bool:
+        return User.query.filter_by(username=username).first() is not None
     
     
     
