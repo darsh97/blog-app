@@ -13,12 +13,27 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/app.py">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/app/__init__.py">
           <value>
             <set />
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/config.py">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/main.py">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/models/models.py">
           <value>
             <set />
           </value>

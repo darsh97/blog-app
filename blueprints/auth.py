@@ -12,6 +12,7 @@ def signup():
         return redirect(url_for('/'))
     
     form = SignupForm()
+    
     if request.method == 'POST':
         if form.validate_on_submit():
             username = form.username.data
@@ -54,6 +55,7 @@ def login():
                 return redirect('/home')
             else:
                 flash("Please check username or password", "error")   
+                
     return render_template('login.html', title="Login", form=form)
 
 

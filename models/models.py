@@ -6,8 +6,9 @@ from datetime import datetime
 
 
 @login.user_loader
-def load_user(id):
-    return User.query.get(int(id))
+def load_user(userid):
+    return User.query.get(int(userid))
+
 
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -18,16 +19,25 @@ class User(UserMixin, db.Model):
     last_seen = db.Column(db.DateTime, default=datetime.utcnow)
     token = db.Column(db.String(32), index=True, unique=True)
     token_expiration = db.Column(db.DateTime)
-    
+
+    posts = db.relationship('Post', backref='author', lazy='dynamic')
+
     def set_password_hash(self, password):
         self.password_hash = generate_password_hash(password)
-    
+
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
-    
-    
+
     def __repr__(self):
         return '<User {}>'.format(self.username)
-    
-    
 
+
+class Post(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    body = db.Column(db.String(250))
+    likes = db.Column(db.Integer)
+    time_stamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+    userid = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+    def __repr__(self):
+        return "<Post {}>".format(self.body)

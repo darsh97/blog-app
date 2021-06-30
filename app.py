@@ -15,22 +15,19 @@ login.login_message = "Please log in to access this page"
 
 
 def create_app(config_class=Config):
-   app = Flask(__name__)
-   app.config.from_object(config_class)
+    app = Flask(__name__)
+    app.config.from_object(config_class)
 
-   db.init_app(app)
-   login.init_app(app)
-   bsp.init_app(app)
+    db.init_app(app)
+    login.init_app(app)
+    bsp.init_app(app)
 
+    Migrate(app, db)
 
-   Migrate(app, db)
-   
-   from blueprints.blog import blog
-   from blueprints.auth import auth
-   
-   app.register_blueprint(blog)
-   app.register_blueprint(auth)
+    from blueprints.blog import blog
+    from blueprints.auth import auth
 
-   return app
+    app.register_blueprint(blog)
+    app.register_blueprint(auth)
 
-
+    return app
